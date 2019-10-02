@@ -1,0 +1,29 @@
+import React from 'react';
+import Typography from "@material-ui/core/Typography";
+import CardContent from "@material-ui/core/CardContent";
+
+
+export class Todo extends React.Component {
+
+
+    render() {
+        return (  
+            <CardContent>
+               
+                <Typography variant="body2" color="textSecondary" component="p">
+                        {" Date " + this.props.dueDate.split("T")[0]}
+                </Typography>
+
+                <Typography variant="body2" color="textSecondary" component="p">
+                        {" Status " + this.props.status}
+                </Typography>
+            
+                <Typography variant="body2" color="textSecondary" component="p">
+                        {" Email resposible " + this.props.email}
+                </Typography>
+
+            </CardContent>
+        );
+    }
+
+}
