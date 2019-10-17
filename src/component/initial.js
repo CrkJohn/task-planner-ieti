@@ -20,8 +20,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = theme => ({
     paper: {
-        marginTop: theme.spacing(1),
-        display: 'flex',
+        marginTop: theme.spacing(0),
+        display: 'contents',
         flexDirection: 'column',
     },
     index: {
@@ -182,7 +182,8 @@ class Index extends React.Component {
         return (  
                 <div className={classes.index} id="temp">
                     <Menu></Menu>
-                    <Container maxWidth='sm'>
+                    <Container maxWidth='sm' >
+                        <br></br>
                         <div className={classes.paper} style={{ overflow: 'auto', height: '600px' }}  >
                             <Cards tdList={this.state.todoList} />
                         </div>
@@ -191,7 +192,7 @@ class Index extends React.Component {
                         </Fab>
                         <br />        
                         <Dialog className={classes.dialog} fullWidth={true} onClose={this.handleClose} aria-labelledby="simple-dialog-title" open={this.state.open} >
-                            <form onSubmit={this.handleSubmit} style={{ width: "100%" }}>
+                            <form onSubmit={this.handleSubmit} style={{ width: "100%"}}>
                                 <center>
                                     <h3>New task</h3>
                                     <Divider id="line2"></Divider>
@@ -252,7 +253,7 @@ class Index extends React.Component {
                                         placeholderText="Due date"
                                         selected={this.state.dueDate}
                                         onChange={this.handleDateChange}>
-    
+                                             
                                     </DatePicker>
                                     <br />
                                     <br />
