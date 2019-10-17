@@ -4,7 +4,7 @@ import  SignIn  from './component/SignIn/SignIn'
 import  SignUp  from './component/SignUp/SignUp'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import EditProfile from './component/editProfile/EditProfile'
-
+import Filter from './component/Filter/Filter'
 import Index from './component/initial';
 
 
@@ -59,9 +59,11 @@ class App extends React.Component {
         <Switch>
             {this.LoggedIn(isLoggedI)}
         </Switch>
-          <Route path="/singup" component={SignUpView} />
+          <Route path="/singUp" component={SignUpView} />
           <Route path="/signin" component={SignInView} />
           <Route path="/editprofile" component={EditProfile}/>
+          <Route path="/filter" component={Filter}/>
+          
         </div>
       </Router>
 

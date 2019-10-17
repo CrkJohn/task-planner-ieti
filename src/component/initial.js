@@ -155,6 +155,7 @@ class Index extends React.Component {
         fetch('http://localhost:8080/v1/task/allTask')
             .then(response => response.json())
             .then(data => {
+    
                 let tasksList = [];
                 data.forEach(function (task) {
                     const newItem = {
@@ -162,120 +163,119 @@ class Index extends React.Component {
                         name: task.members[0].name,
                         email: task.members[0].email,
                         dueDate : task.expirationDate,
+                        status  : task.state,
                         id: Date.now()
                     };
                     tasksList.push(newItem)
-
                 });
+                console.log(tasksList)
                 this.setState({todoList:tasksList});
-            });
+        });
     }
 
 
     render() {
         const { classes } = this.props;
         const estados = [
-            { value: "Completed"}, { value: "In Progress" }, { value: "Ready"}
+            { value: "Completed"}, { value: "InProgress" }, { value: "Ready"}
           ]   
-        return (
-            <div className={classes.index} id="temp">
-
-                <Menu></Menu>
-               
-                <Container maxWidth='sm'>
-                    <div className={classes.paper} style={{ overflow: 'auto', height: '600px' }}  >
-                        <Cards tdList={this.state.todoList} />
-                    </div>
-                    <Fab aria-label="add" className={classes.fab} onClick={this.handleOpen}>
-                        <AddIcon />
-                    </Fab>
-                    <br />
-                    <Dialog className={classes.dialog} fullWidth={true} onClose={this.handleClose} aria-labelledby="simple-dialog-title" open={this.state.open} >
-                        <form onSubmit={this.handleSubmit} style={{ width: "100%" }}>
-                            <center>
-                                <h3>New task</h3>
-                                <Divider id="line2"></Divider>
-
-                                <TextField
-                                    id="new-todo"
-                                    label="Text"
-                                    margin="normal"
-                                    type="text"
-                                    onChange={this.handleTextChange}
-                                    value={this.state.text}
-                                />
+        return (  
+                <div className={classes.index} id="temp">
+                    <Menu></Menu>
+                    <Container maxWidth='sm'>
+                        <div className={classes.paper} style={{ overflow: 'auto', height: '600px' }}  >
+                            <Cards tdList={this.state.todoList} />
+                        </div>
+                        <Fab aria-label="add" className={classes.fab} onClick={this.handleOpen}>
+                            <AddIcon />
+                        </Fab>
+                        <br />        
+                        <Dialog className={classes.dialog} fullWidth={true} onClose={this.handleClose} aria-labelledby="simple-dialog-title" open={this.state.open} >
+                            <form onSubmit={this.handleSubmit} style={{ width: "100%" }}>
+                                <center>
+                                    <h3>New task</h3>
+                                    <Divider id="line2"></Divider>
+    
+                                    <TextField
+                                        id="new-todo"
+                                        label="Text"
+                                        margin="normal"
+                                        type="text"
+                                        onChange={this.handleTextChange}
+                                        value={this.state.text}
+                                    />
+                                    <br />
+                                    <br />
+    
+                                    <TextField
+                                        id="new-status"
+                                        select
+                                        label="status"
+                                        margin="normal"
+                                        helperText="Please select a status"
+    
+                                        onChange={this.handleStatusChange}
+                                        value={this.state.status}
+    
+                                    >
+                                        {estados.map(option => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.value}
+                                            </MenuItem>))}
+    
+                                    </TextField>
+                                    <br />
+                                    <br />
+    
+                                    <TextField
+                                        id="new-email"
+                                        label="email"
+                                        type="text"
+                                        onChange={this.handleEmailChange}
+                                        value={this.state.email}
+                                    />
+                                    <br />
+                                    <br />
+    
+                                    <TextField
+                                        id="new-name"
+                                        label="name"
+                                        type="text"
+                                        onChange={this.handleNameChange}
+                                        value={this.state.name}
+                                    />
+                                    <br />
+                                    <br />
+    
+                                    <DatePicker
+                                        id="due-date"
+                                        placeholderText="Due date"
+                                        selected={this.state.dueDate}
+                                        onChange={this.handleDateChange}>
+    
+                                    </DatePicker>
+                                    <br />
+                                    <br />
+    
+                                    <Button type="submit" variant="contained" color="primary">
+                                        {"Submit"}
+                                    </Button>
+    
+                                    <Button onClick={this.handleClose} variant="contained" color="secondary">
+                                        Cancel
+                                    </Button>
+    
+    
+                                </center>
                                 <br />
-                                <br />
-
-                                <TextField
-                                    id="new-status"
-                                    select
-                                    label="status"
-                                    margin="normal"
-                                    helperText="Please select a status"
-
-                                    onChange={this.handleStatusChange}
-                                    value={this.state.status}
-                                    
-                                >
-                                {estados.map(option => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                      {option.value}
-                                    </MenuItem>))}
-
-                                </TextField>
-                                <br />
-                                <br />
-
-                                <TextField
-                                    id="new-email"
-                                    label="email"
-                                    type="text"
-                                    onChange={this.handleEmailChange}
-                                    value={this.state.email}
-                                />
-                                <br />
-                                <br />
-
-                                <TextField
-                                    id="new-name"
-                                    label="name"
-                                    type="text"
-                                    onChange={this.handleNameChange}
-                                    value={this.state.name}
-                                />
-                                <br />
-                                <br />
-
-                                <DatePicker
-                                    id="due-date"
-                                    placeholderText="Due date"
-                                    selected={this.state.dueDate}
-                                    onChange={this.handleDateChange}>
-
-                                </DatePicker>
-                                <br />
-                                <br />
-
-                                <Button type="submit" variant="contained" color="primary">
-                                    {"Submit"}
-                                </Button>
-
-                                <Button onClick={this.handleClose} variant="contained" color="secondary">
-                                    Cancel
-                                </Button>
-
-
-                            </center>
-                            <br />
-                        </form>
-
-                    </Dialog>
-
-                </Container>
-
-            </div>
-        );
+                            </form>
+    
+                        </Dialog>
+    
+                    </Container>
+    
+                </div>
+            );
     }
 }
 

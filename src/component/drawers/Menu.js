@@ -12,24 +12,25 @@ import PropTypes from 'prop-types';
 import DataUsageIcon from '@material-ui/icons/DataUsage';
 import './UserTab.css';
 import SearchIcon from '@material-ui/icons/Search';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-const useStyles  = theme =>  ({
+
+const useStyles = theme => ({
     list: {
         width: 250,
     },
     fullList: {
         width: 'auto',
     },
-    button : {
+    button: {
         margin: theme.spacing.unit, // You might not need this now
         position: "absolute",
-        bottom: theme.spacing.unit ,
+        bottom: theme.spacing.unit,
         right: theme.spacing.unit
     },
-    iconHover : {
-        color : "white",
+    iconHover: {
+        color: "white",
 
     }
 });
@@ -39,9 +40,15 @@ class Menu extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { open: false };
+        this.state = {
+            open: false,
+         
+        };
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
+
+
+
     }
 
     logout() {
@@ -64,59 +71,70 @@ class Menu extends React.Component {
 
     render() {
         const { classes } = this.props;
+        const estados = [
+            { value: "Completed" }, { value: "In Progress" }, { value: "Ready" }
+        ]
         return (
             <div>
-                
-                <Button onClick={this.handleOpen} style= {{top:0, left:0}} >
-                    <DataUsageIcon className={classes.iconHover}  fontSize="large"  ></DataUsageIcon>
+
+                <Button onClick={this.handleOpen} style={{ top: 0, left: 0 }} >
+                    <DataUsageIcon className={classes.iconHover} fontSize="large"  ></DataUsageIcon>
                 </Button>
-                <Button  style={{position:"fixed",top:0, right:0}}>
-                    <SearchIcon className={classes.iconHover}  fontSize="large"  ></SearchIcon>
-                </Button>
-            
+              
                 <Divider id="line"></Divider>
+
+
+
 
                 <Drawer open={this.state.open} onClose={this.handleClose}>
                     <div
                         className={classes.list}
                         role="presentation"
                         onClick={this.handleClose}
-                        style = {{
-                            }} 
-                        >
+                        style={{
+                        }}
+                    >
                         <List>
                             <ListItem>
                                 <div className="logo-content">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png"/>
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png"></img>
                                 </div>
                                 <br>
                                 </br>
                                 <ListItemText>
                                     David Ibañez
-                                </ListItemText> 
-                            </ListItem> 
+                                </ListItemText>
+                            </ListItem>
 
 
                             <ListItem button component={Link} to="/index">
                                 <ListItemIcon>
                                     <InboxIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={'Index'}/>    
-                            </ListItem > 
+                                <ListItemText primary={'Index'} />
+                            </ListItem >
                             <ListItem button component={Link} to="/editprofile">
                                 <ListItemIcon>
                                     <InboxIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={'Edit profile'}/>    
-                            </ListItem > 
-                        
+                                <ListItemText primary={'Edit profile'} />
+                            </ListItem >
+
+                            <ListItem button component={Link} to="/filter">
+                                <ListItemIcon>
+                                    <InboxIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={'Filter task'} />
+                            </ListItem >
+
                         </List>
-                        <Divider/>
-                        <Button className = {classes.button} style = {{
-                                            backgroundColor: "#1976d2",color : "white"}} 
-                                        variant="contained" 
-                                        onClick={this.logout}>
-                                        LogOut
+                        <Divider />
+                        <Button className={classes.button} style={{
+                            backgroundColor: "#1976d2", color: "white"
+                        }}
+                            variant="contained"
+                            onClick={this.logout}>
+                            LogOut
                         </Button>
                     </div>
                 </Drawer>
