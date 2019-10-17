@@ -43,11 +43,15 @@ export class Cards extends React.Component {
         const listTodo = this.props.tdList.map((td, id) => {
             if (this.props.filter !== undefined && (this.props.filter.name !== '' ||
                 this.props.filter.status !== '' || this.props.filter.dueDate !== null )) {
-                let x = this.props.filter.dueDate.toString()
-                const newDate = x.split(" ")[3]+"-"+this.Eq(x.split(" ")[1])+"-"+x.split(" ")[2];
-                if (td.email.includes(this.props.filter.name) ||
-                    td.status.includes(this.props.filter.status) || td.dueDate.split("T")[0] == newDate) {
-                    return (<div key={id}>
+                    let x = null ,newDate = null;
+                    if(this.props.filter.dueDate !== null){
+                        x = this.props.filter.dueDate.toString()
+                        newDate = x.split(" ")[3]+"-"+this.Eq(x.split(" ")[1])+"-"+x.split(" ")[2];
+                    }
+                   
+                    if (td.email === (this.props.filter.name) ||
+                        td.status === (this.props.filter.status) || td.dueDate.split("T")[0] == newDate) {
+                        return (<div key={id}>
                         <Card>
                             <CardActionArea>
                                 <Todo email={td.email} status={td.status} text={td.text} priority={td.priority} dueDate={td.dueDate} ></Todo>
